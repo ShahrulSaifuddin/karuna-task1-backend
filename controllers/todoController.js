@@ -93,3 +93,21 @@ export const editTodo = async (req, res) => {
   }
 };
 // #endregion
+
+// #region Get Todo
+export const getAllTodos = async (req, res) => {
+  console.log('BODY', req.user);
+
+  try {
+    const todo = await Todo.find({ createdBy: req.user.userId });
+    console.log('Todo', todo);
+
+    res.status(StatusCodes.CREATED).json({ todo });
+  } catch (error) {
+    console.error('Error creating checklist:', error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: 'Failed to create checklist' });
+  }
+};
+// #endregion

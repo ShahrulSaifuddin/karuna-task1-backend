@@ -4,6 +4,7 @@ import User from '../models/UserModel.js';
 export const getCurrentUser = async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.user.userId });
+    console.log(user);
     res.status(StatusCodes.OK).json({ user });
   } catch (error) {
     // Handle errors gracefully
