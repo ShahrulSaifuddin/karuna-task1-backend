@@ -52,10 +52,8 @@ export const updateTodo = async (req, res) => {
 
 // #region Delete Todo
 export const deleteTodo = async (req, res) => {
-  console.log('BODY delete', req);
-
   try {
-    const todo = await Todo.findByIdAndDelete(req.body.id);
+    const todo = await Todo.findByIdAndDelete(req.params.id);
 
     res.status(StatusCodes.CREATED).json({ todo });
   } catch (error) {

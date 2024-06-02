@@ -19,11 +19,11 @@ router
   .route('/')
   .get(getAllTodos)
   .post(validateTodoInput, createTodo)
-  .patch(updateTodo)
-  .delete(deleteTodo);
+  .patch(updateTodo);
 
 router
   .route('/:id')
-  .patch(validateTodoInput, validateIdParam, validateOwner, editTodo);
+  .patch(validateTodoInput, validateIdParam, validateOwner, editTodo)
+  .delete(deleteTodo);
 
 export default router;
