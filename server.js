@@ -51,8 +51,8 @@ app.use(errorHandlerMiddleware);
 // #endregion
 
 // #region Running up the server
-// const port = process.env.PORT || 5100;
-const port = 5000;
+const port = process.env.PORT || 5100;
+// const port = 5000;
 try {
   await mongoose.connect(process.env.MONGO_URL);
   server.listen(port, () => {
