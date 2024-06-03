@@ -53,13 +53,20 @@ app.use(errorHandlerMiddleware);
 // #region Running up the server
 const port = process.env.PORT || 5100;
 // const port = 5000;
-try {
-  await mongoose.connect(process.env.MONGO_URL);
-  server.listen(port, () => {
-    console.log(`server running on PORT ${port}...`);
-  });
-} catch (error) {
-  console.log(error);
-  process.exit(1);
-}
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    server.listen(port, () => {
+      console.log(`Server running on PORT ${port}...`);
+    });
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+};
+
+startServer();
 // #endregion
