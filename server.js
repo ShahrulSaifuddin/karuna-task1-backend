@@ -52,13 +52,20 @@ app.use(errorHandlerMiddleware);
 
 // #region Running up the server
 const port = process.env.PORT || 5100;
-// const port = 5000;
+console.log(`PORT: ${port}`);
+console.log(`MONGO_URL: ${process.env.MONGO_URL}`);
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+
 const startServer = async () => {
   try {
+    if (!process.env.MONGO_URL) {
+      throw new Error('MONGO_URL environment variable is not defined');
+    }
     await mongoose.connect(process.env.MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    console.log('MongoDB connected successfully');
     server.listen(port, () => {
       console.log(`Server running on PORT ${port}...`);
     });
